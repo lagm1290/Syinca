@@ -22,3 +22,8 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.sidebar ul li a {
+    font-size: 18px !important;
+    font-weight: 700;
+}
