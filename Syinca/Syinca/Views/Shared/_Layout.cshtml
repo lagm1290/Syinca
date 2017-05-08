@@ -41,8 +41,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-            </div>
-            <!-- /.Encabezado barra de navegación -->
+            </div> 
+            
+            @*<!-- /.Encabezado barra de navegación -->
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.desplegable -->
                 <li class="dropdown">
@@ -128,7 +129,7 @@
                     <!-- /.dropdown-user -->
                 </li>
                 <!-- /.dropdown -->
-            </ul>
+            </ul>*@
             <!-- /.navbar-top-links -->
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
@@ -167,13 +168,14 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Ventas<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Facturacion<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="~/Venta/VentaFactura"><i class="fa fa-archive fa-fw" style="color:#f0ad4e"></i>Generar Factura</a>
+                                    <a href="~/Venta/VentaFactura"><i class="fa fa-archive fa-fw" style="color:#f0ad4e"></i>Factura de Venta</a>
                                 </li>
+
                                 <li>
-                                    <a href="~/Venta/NuevaVenta"><i class="fa fa-shopping-cart fa-fw" style="color:#f0ad4e"></i>Nueva Venta</a>
+                                    <a href="~/Venta/NuevaVenta"><i class="fa fa-shopping-cart fa-fw" style="color:#f0ad4e"></i>Cierre Diario</a>
                                 </li>
                                 <li>
                                     <a href="~/DetalleVenta/Index"><i class="fa fa-info-circle fa-fw" style="color:#f0ad4e"></i>Detalle Ventas</a>
@@ -184,49 +186,51 @@
 
                             </ul>
                         </li>
+
                         <li>
-                            <a href="~/Cliente/Index"><i class="fa fa-user fa-fw"></i> Clientes</a>
+                            <a href="~/Cliente/Index"><i class="fa fa-user fa-fw"></i> Terceros</a>
                         </li>
                         <li>
                             <a href="~/Vendedor/Index"><i class="fa fa-user fa-fw"></i> Vendedores</a>
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Cobros y Pagos<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="~/ModoPago/Index"><i class="fa fa-dollar fa-fw" style="color:#f0ad4e"></i>Modos de Pago</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-dollar fa-fw" style="color:#f0ad4e"></i>Pagos</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-dollar fa-fw" style="color:#f0ad4e"></i>Cobros</a>
-                                </li>
+@*
+    <li>
+        <a href="#"><i class="fa fa-wrench fa-fw"></i> Cobros y Pagos<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+            <li>
+                <a href="~/ModoPago/Index"><i class="fa fa-dollar fa-fw" style="color:#f0ad4e"></i>Modos de Pago</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-dollar fa-fw" style="color:#f0ad4e"></i>Pagos</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-dollar fa-fw" style="color:#f0ad4e"></i>Cobros</a>
+            </li>
 
-                            </ul>
-                        </li>
+        </ul>
+    </li>
 
-                        <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Administración<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#">Empresa</a>
-                                </li>
-                                <li>
-                                    <a href="#">Empleados</a>
-                                </li>
-                                <li>
-                                    <a href="#">Almacenes</a>
-                                </li>
-                                <li>
-                                    <a href="#">Cargos</a>
-                                </li>
-                                <li>
-                                    <a href="#"> Usuarios</a>
-                                </li>
+    <li>
+        <a href="#"><i class="fa fa-wrench fa-fw"></i> Administración<span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+            <li>
+                <a href="#">Empresa</a>
+            </li>
+            <li>
+                <a href="#">Empleados</a>
+            </li>
+            <li>
+                <a href="#">Almacenes</a>
+            </li>
+            <li>
+                <a href="#">Cargos</a>
+            </li>
+            <li>
+                <a href="#"> Usuarios</a>
+            </li>
 
-                            </ul>
-                        </li>
+        </ul>
+    </li>*@
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
