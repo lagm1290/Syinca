@@ -14,6 +14,7 @@
     <title>Syinca.net</title>
     <!-- Bootstrap Core CSS -->
     <link href="~/Assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Assets/Site/ripples.min.css" rel="stylesheet" />
     <!-- MetisMenu CSS -->
     <link href="~/Assets/metisMenu/metisMenu.min.css" rel="stylesheet" />
     <!-- Custom CSS -->
@@ -22,6 +23,9 @@
     <link href="~/Assets/morrisjs/morris.css" rel="stylesheet" />
     <!-- Custom Fonts -->
     <link href="~/Assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- CSS del sitio-->
+    <link href="~/Content/Site.css" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -134,17 +138,7 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
+                        
                         <li>
                             <a href="~/"><i class="fa fa-home fa-fw"></i> Inicio</a>
                         </li>
@@ -152,7 +146,7 @@
                             <a href="#"><i class="fa fa-car fa-fw"></i> Gestión Comercial<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="~/Categoria/Index"><i class="fa fa-check fa-university" style="color:#f0ad4e"></i>Control Empresas</a>
+                                    <a href="~/Empresas/Index"><i class="fa fa-check fa-university" style="color:#f0ad4e"></i>Control Empresas</a>
                                 </li>
                                 <li>
                                     <a href="~/Categoria/Index"><i class="fa fa-check fa-street-view" style="color:#f0ad4e"></i>Control Visitas</a>
@@ -164,8 +158,19 @@
                                 <li>
                                     <a href="#"><i class="fa fa-sort-numeric-asc fa-list-ol " style="color:#f0ad4e"></i>Control Metas</a>
                                 </li>
+
                                 <li>
                                     <a href="#"><i class="fa fa-sort-numeric-asc fa-fw" style="color:#f0ad4e"></i>Informes</a>
+
+                                </li>
+                                <li>
+                                    <!--<a href="#"><i class="fa fa-sort-numeric-asc fa-list-ol " style="color:#f0ad4e"></i>Comfiguración</a>-->
+                                    <a href="#"><i class="fa fa-car fa-fw"  style="color:#f0ad4e"></i> Comfiguración<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="#"><i class="fa fa-sort-numeric-asc fa-list-ol " style="color:#f0ad4e"></i>Representante</a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -260,9 +265,14 @@
     <!-- Morris Charts JavaScript -->
 
     <script src="~/Assets/morrisjs/morris.min.js"></script>
+    <script src="~/Assets/Site/ripples.min.js"></script>
 
+    
+    <!--cargar libreria vu.js -->
+    <script src="~/Js/vue.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="~/Js/sb-admin-2.js"></script>
+    <script src="~/Js/Site.js"></script>
 
 
 </body>
