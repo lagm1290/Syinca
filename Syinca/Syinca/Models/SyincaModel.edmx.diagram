@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3098dafde6a743298250d2808012583d" Name="Diagram1">
+        <EntityTypeShape EntityType="SistemComfacorModel.COM_DetalleMetaPromocion" Width="1.875" PointX="14" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SistemComfacorModel.COM_Empresas" Width="1.5" PointX="0.875" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SistemComfacorModel.COM_Finalidades" Width="1.5" PointX="9.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SistemComfacorModel.COM_Metas" Width="1.5" PointX="11.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SistemComfacorModel.COM_ObjetivosVisitas" Width="1.5" PointX="2.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SistemComfacorModel.COM_RepresantesComerciales" Width="1.5" PointX="6.375" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SistemComfacorModel.COM_Representantes" Width="1.5" PointX="2.875" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SistemComfacorModel.COM_Servicios" Width="1.5" PointX="8.375" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="SistemComfacorModel.COM_ServiciosMasSolicitados" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SistemComfacorModel.COM_Sucursales" Width="1.5" PointX="3.125" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SistemComfacorModel.COM_Visitas" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SistemComfacorModel.COM_Zonas" Width="1.5" PointX="0.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SistemComfacorModel.COM_DetalleVisita" Width="1.625" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SistemComfacorModel.COM_QuienRecibeVisita" Width="1.5" PointX="11.125" PointY="4.125" IsExpanded="true" />
+        <AssociationConnector Association="SistemComfacorModel.FK_COM_DetalleMetaPromocion_COM_Metas" ManuallyRouted="false" />
+        <AssociationConnector Association="SistemComfacorModel.FK_COM_Empresas_COM_Representantes" ManuallyRouted="false" />
+        <AssociationConnector Association="SistemComfacorModel.FK_COM_Sucursales_COM_Empresas" ManuallyRouted="false" />
+        <AssociationConnector Association="SistemComfacorModel.FK_COM_DetalleVisita_COM_Finalidades" ManuallyRouted="false" />
+        <AssociationConnector Association="SistemComfacorModel.FK_COM_Visitas_COM_ObjetivosVisitas" ManuallyRouted="false" />
+        <AssociationConnector Association="SistemComfacorModel.FK_COM_Visitas_COM_RepresantesComerciales" ManuallyRouted="false" />
+        <AssociationConnector Association="SistemComfacorModel.FK_COM_Sucursales_COM_Representantes" ManuallyRouted="false" />
+        <AssociationConnector Association="SistemComfacorModel.FK_COM_ServiciosMasSolicitados_COM_Servicios" ManuallyRouted="false" />
+        <AssociationConnector Association="SistemComfacorModel.FK_COM_ServiciosMasSolicitados_COM_Visitas" ManuallyRouted="false" />
+        <AssociationConnector Association="SistemComfacorModel.FK_COM_Sucursales_COM_Zonas" ManuallyRouted="false" />
+        <AssociationConnector Association="SistemComfacorModel.FK_COM_Visitas_COM_Sucursales" ManuallyRouted="false" />
+        <AssociationConnector Association="SistemComfacorModel.FK_COM_DetalleVisita_COM_Visitas" ManuallyRouted="false" />
+        <AssociationConnector Association="SistemComfacorModel.FK_COM_QuienRecibeVisita_COM_Visitas" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -4,7 +4,36 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EmpresasDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EmpresasDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="COM_DetalleMeta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Servicio" Type="int" />
+          <Property Name="VentaMensual" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="VentaAnual" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Meta" Type="int" />
+        </EntityType>
+        <EntityType Name="COM_DetalleMetaPromocion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="VisitasMensual" Type="int" />
+          <Property Name="VisitasAnual" Type="int" />
+          <Property Name="Descripcion" Type="nchar" MaxLength="10" />
+          <Property Name="Meta" Type="int" />
+        </EntityType>
+        <EntityType Name="COM_DetalleVisita">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Finalidad" Type="int" Nullable="false" />
+          <Property Name="Detalle" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Visita" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="COM_Empresas">
           <Key>
             <PropertyRef Name="Id" />
@@ -25,61 +54,1020 @@
           <Property Name="Longitud" Type="int" />
           <Property Name="Zona" Type="int" />
         </EntityType>
+        <EntityType Name="COM_Finalidades">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="10" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="COM_Metas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="FechaInicial" Type="datetime" />
+          <Property Name="FechaFinal" Type="datetime" />
+          <Property Name="NroAnualEmpresas" Type="int" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" />
+          <Property Name="PorCumplimiento" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="COM_ObjetivosVisitas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="250" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="COM_QuienRecibeVisita">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Firma" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Visita" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COM_RepresantesComerciales">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Identificacion" Type="varchar" MaxLength="20" />
+          <Property Name="Pnombre" Type="varchar" MaxLength="50" />
+          <Property Name="Snombre" Type="varchar" MaxLength="50" />
+          <Property Name="Papellido" Type="varchar" MaxLength="50" />
+          <Property Name="Sapellido" Type="varchar" MaxLength="50" />
+          <Property Name="Ciudad" Type="int" />
+          <Property Name="Direccion" Type="varchar" MaxLength="150" />
+          <Property Name="TelContactoEmp" Type="varchar" MaxLength="10" />
+          <Property Name="TelContactoEmerg" Type="varchar" MaxLength="10" />
+          <Property Name="ContactoEmerg" Type="varchar" MaxLength="250" />
+          <Property Name="Email" Type="varchar" MaxLength="150" />
+          <Property Name="Zona" Type="int" />
+        </EntityType>
+        <EntityType Name="COM_Representantes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Identificacion" Type="varchar" MaxLength="20" />
+          <Property Name="Pnombre" Type="varchar" MaxLength="50" />
+          <Property Name="Snombre" Type="varchar" MaxLength="50" />
+          <Property Name="Papellido" Type="varchar" MaxLength="50" />
+          <Property Name="Sapellido" Type="varchar" MaxLength="50" />
+          <Property Name="Nombre" Type="varchar" MaxLength="250" />
+          <Property Name="TelContacto" Type="varchar" MaxLength="15" />
+          <Property Name="Email" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="COM_Servicios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COM_ServiciosMasSolicitados">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Visita" Type="int" />
+          <Property Name="Servicio" Type="int" />
+        </EntityType>
+        <EntityType Name="COM_Sucursales">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Ciudad" Type="int" />
+          <Property Name="Direccion" Type="varchar" MaxLength="150" />
+          <Property Name="TelefonoFijo" Type="varchar" MaxLength="10" />
+          <Property Name="NroCelular" Type="varchar" MaxLength="15" />
+          <Property Name="Contacto" Type="int" />
+          <Property Name="Email" Type="varchar" MaxLength="150" />
+          <Property Name="NroEmpleados" Type="int" />
+          <Property Name="Latitud" Type="int" />
+          <Property Name="Longitud" Type="int" />
+          <Property Name="Zona" Type="int" />
+          <Property Name="Empresa" Type="int" />
+        </EntityType>
+        <EntityType Name="COM_Visitas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Representante" Type="int" />
+          <Property Name="Sucursal" Type="int" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="HoraInici" Type="time" Precision="7" />
+          <Property Name="HoraFin" Type="time" Precision="7" />
+          <Property Name="Tiempo" Type="time" Precision="7" />
+          <Property Name="Tipo" Type="varchar" MaxLength="50" />
+          <Property Name="Objetivo" Type="int" />
+          <Property Name="Estado" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="COM_Zonas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Codigo" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="FK_COM_DetalleMeta_COM_Metas">
+          <End Role="COM_Metas" Type="Self.COM_Metas" Multiplicity="0..1" />
+          <End Role="COM_DetalleMeta" Type="Self.COM_DetalleMeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Metas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_DetalleMeta">
+              <PropertyRef Name="Meta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_DetalleMetaPromocion_COM_Metas">
+          <End Role="COM_Metas" Type="Self.COM_Metas" Multiplicity="0..1" />
+          <End Role="COM_DetalleMetaPromocion" Type="Self.COM_DetalleMetaPromocion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Metas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_DetalleMetaPromocion">
+              <PropertyRef Name="Meta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_DetalleVisita_COM_Finalidades">
+          <End Role="COM_Finalidades" Type="Self.COM_Finalidades" Multiplicity="1" />
+          <End Role="COM_DetalleVisita" Type="Self.COM_DetalleVisita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Finalidades">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_DetalleVisita">
+              <PropertyRef Name="Finalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_DetalleVisita_COM_Visitas">
+          <End Role="COM_Visitas" Type="Self.COM_Visitas" Multiplicity="1" />
+          <End Role="COM_DetalleVisita" Type="Self.COM_DetalleVisita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Visitas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_DetalleVisita">
+              <PropertyRef Name="Visita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_Empresas_COM_Representantes">
+          <End Role="COM_Representantes" Type="Self.COM_Representantes" Multiplicity="1" />
+          <End Role="COM_Empresas" Type="Self.COM_Empresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Representantes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_Empresas">
+              <PropertyRef Name="Representante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_QuienRecibeVisita_COM_Visitas">
+          <End Role="COM_Visitas" Type="Self.COM_Visitas" Multiplicity="1" />
+          <End Role="COM_QuienRecibeVisita" Type="Self.COM_QuienRecibeVisita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Visitas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_QuienRecibeVisita">
+              <PropertyRef Name="Visita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_ServiciosMasSolicitados_COM_Servicios">
+          <End Role="COM_Servicios" Type="Self.COM_Servicios" Multiplicity="0..1" />
+          <End Role="COM_ServiciosMasSolicitados" Type="Self.COM_ServiciosMasSolicitados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Servicios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_ServiciosMasSolicitados">
+              <PropertyRef Name="Servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_ServiciosMasSolicitados_COM_Visitas">
+          <End Role="COM_Visitas" Type="Self.COM_Visitas" Multiplicity="0..1" />
+          <End Role="COM_ServiciosMasSolicitados" Type="Self.COM_ServiciosMasSolicitados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Visitas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_ServiciosMasSolicitados">
+              <PropertyRef Name="Visita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_Sucursales_COM_Empresas">
+          <End Role="COM_Empresas" Type="Self.COM_Empresas" Multiplicity="0..1" />
+          <End Role="COM_Sucursales" Type="Self.COM_Sucursales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Empresas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_Sucursales">
+              <PropertyRef Name="Empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_Sucursales_COM_Representantes">
+          <End Role="COM_Representantes" Type="Self.COM_Representantes" Multiplicity="0..1" />
+          <End Role="COM_Sucursales" Type="Self.COM_Sucursales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Representantes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_Sucursales">
+              <PropertyRef Name="Contacto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_Sucursales_COM_Zonas">
+          <End Role="COM_Zonas" Type="Self.COM_Zonas" Multiplicity="0..1" />
+          <End Role="COM_Sucursales" Type="Self.COM_Sucursales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Zonas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_Sucursales">
+              <PropertyRef Name="Zona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_Visitas_COM_ObjetivosVisitas">
+          <End Role="COM_ObjetivosVisitas" Type="Self.COM_ObjetivosVisitas" Multiplicity="0..1" />
+          <End Role="COM_Visitas" Type="Self.COM_Visitas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_ObjetivosVisitas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_Visitas">
+              <PropertyRef Name="Objetivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_Visitas_COM_RepresantesComerciales">
+          <End Role="COM_RepresantesComerciales" Type="Self.COM_RepresantesComerciales" Multiplicity="0..1" />
+          <End Role="COM_Visitas" Type="Self.COM_Visitas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_RepresantesComerciales">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_Visitas">
+              <PropertyRef Name="Representante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_Visitas_COM_Sucursales">
+          <End Role="COM_Sucursales" Type="Self.COM_Sucursales" Multiplicity="0..1" />
+          <End Role="COM_Visitas" Type="Self.COM_Visitas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Sucursales">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_Visitas">
+              <PropertyRef Name="Sucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="EmpresasDBModelStoreContainer">
+          <EntitySet Name="COM_DetalleMeta" EntityType="Self.COM_DetalleMeta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COM_DetalleMetaPromocion" EntityType="Self.COM_DetalleMetaPromocion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COM_DetalleVisita" EntityType="Self.COM_DetalleVisita" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="COM_Empresas" EntityType="Self.COM_Empresas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COM_Finalidades" EntityType="Self.COM_Finalidades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COM_Metas" EntityType="Self.COM_Metas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COM_ObjetivosVisitas" EntityType="Self.COM_ObjetivosVisitas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COM_QuienRecibeVisita" EntityType="Self.COM_QuienRecibeVisita" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COM_RepresantesComerciales" EntityType="Self.COM_RepresantesComerciales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COM_Representantes" EntityType="Self.COM_Representantes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COM_Servicios" EntityType="Self.COM_Servicios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COM_ServiciosMasSolicitados" EntityType="Self.COM_ServiciosMasSolicitados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COM_Sucursales" EntityType="Self.COM_Sucursales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COM_Visitas" EntityType="Self.COM_Visitas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COM_Zonas" EntityType="Self.COM_Zonas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_COM_DetalleMeta_COM_Metas" Association="Self.FK_COM_DetalleMeta_COM_Metas">
+            <End Role="COM_Metas" EntitySet="COM_Metas" />
+            <End Role="COM_DetalleMeta" EntitySet="COM_DetalleMeta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_DetalleMetaPromocion_COM_Metas" Association="Self.FK_COM_DetalleMetaPromocion_COM_Metas">
+            <End Role="COM_Metas" EntitySet="COM_Metas" />
+            <End Role="COM_DetalleMetaPromocion" EntitySet="COM_DetalleMetaPromocion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_DetalleVisita_COM_Finalidades" Association="Self.FK_COM_DetalleVisita_COM_Finalidades">
+            <End Role="COM_Finalidades" EntitySet="COM_Finalidades" />
+            <End Role="COM_DetalleVisita" EntitySet="COM_DetalleVisita" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_DetalleVisita_COM_Visitas" Association="Self.FK_COM_DetalleVisita_COM_Visitas">
+            <End Role="COM_Visitas" EntitySet="COM_Visitas" />
+            <End Role="COM_DetalleVisita" EntitySet="COM_DetalleVisita" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_Empresas_COM_Representantes" Association="Self.FK_COM_Empresas_COM_Representantes">
+            <End Role="COM_Representantes" EntitySet="COM_Representantes" />
+            <End Role="COM_Empresas" EntitySet="COM_Empresas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_QuienRecibeVisita_COM_Visitas" Association="Self.FK_COM_QuienRecibeVisita_COM_Visitas">
+            <End Role="COM_Visitas" EntitySet="COM_Visitas" />
+            <End Role="COM_QuienRecibeVisita" EntitySet="COM_QuienRecibeVisita" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_ServiciosMasSolicitados_COM_Servicios" Association="Self.FK_COM_ServiciosMasSolicitados_COM_Servicios">
+            <End Role="COM_Servicios" EntitySet="COM_Servicios" />
+            <End Role="COM_ServiciosMasSolicitados" EntitySet="COM_ServiciosMasSolicitados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_ServiciosMasSolicitados_COM_Visitas" Association="Self.FK_COM_ServiciosMasSolicitados_COM_Visitas">
+            <End Role="COM_Visitas" EntitySet="COM_Visitas" />
+            <End Role="COM_ServiciosMasSolicitados" EntitySet="COM_ServiciosMasSolicitados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_Sucursales_COM_Empresas" Association="Self.FK_COM_Sucursales_COM_Empresas">
+            <End Role="COM_Empresas" EntitySet="COM_Empresas" />
+            <End Role="COM_Sucursales" EntitySet="COM_Sucursales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_Sucursales_COM_Representantes" Association="Self.FK_COM_Sucursales_COM_Representantes">
+            <End Role="COM_Representantes" EntitySet="COM_Representantes" />
+            <End Role="COM_Sucursales" EntitySet="COM_Sucursales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_Sucursales_COM_Zonas" Association="Self.FK_COM_Sucursales_COM_Zonas">
+            <End Role="COM_Zonas" EntitySet="COM_Zonas" />
+            <End Role="COM_Sucursales" EntitySet="COM_Sucursales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_Visitas_COM_ObjetivosVisitas" Association="Self.FK_COM_Visitas_COM_ObjetivosVisitas">
+            <End Role="COM_ObjetivosVisitas" EntitySet="COM_ObjetivosVisitas" />
+            <End Role="COM_Visitas" EntitySet="COM_Visitas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_Visitas_COM_RepresantesComerciales" Association="Self.FK_COM_Visitas_COM_RepresantesComerciales">
+            <End Role="COM_RepresantesComerciales" EntitySet="COM_RepresantesComerciales" />
+            <End Role="COM_Visitas" EntitySet="COM_Visitas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_Visitas_COM_Sucursales" Association="Self.FK_COM_Visitas_COM_Sucursales">
+            <End Role="COM_Sucursales" EntitySet="COM_Sucursales" />
+            <End Role="COM_Visitas" EntitySet="COM_Visitas" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EmpresasDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EmpresasContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="COM_DetalleMeta" EntityType="EmpresasDBModel.COM_DetalleMeta" />
+          <EntitySet Name="COM_DetalleMetaPromocion" EntityType="EmpresasDBModel.COM_DetalleMetaPromocion" />
+          <EntitySet Name="COM_DetalleVisita" EntityType="EmpresasDBModel.COM_DetalleVisita" />
+          <EntitySet Name="COM_Empresas" EntityType="EmpresasDBModel.COM_Empresas" />
+          <EntitySet Name="COM_Finalidades" EntityType="EmpresasDBModel.COM_Finalidades" />
+          <EntitySet Name="COM_Metas" EntityType="EmpresasDBModel.COM_Metas" />
+          <EntitySet Name="COM_ObjetivosVisitas" EntityType="EmpresasDBModel.COM_ObjetivosVisitas" />
+          <EntitySet Name="COM_QuienRecibeVisita" EntityType="EmpresasDBModel.COM_QuienRecibeVisita" />
+          <EntitySet Name="COM_RepresantesComerciales" EntityType="EmpresasDBModel.COM_RepresantesComerciales" />
+          <EntitySet Name="COM_Representantes" EntityType="EmpresasDBModel.COM_Representantes" />
+          <EntitySet Name="COM_Servicios" EntityType="EmpresasDBModel.COM_Servicios" />
+          <EntitySet Name="COM_ServiciosMasSolicitados" EntityType="EmpresasDBModel.COM_ServiciosMasSolicitados" />
+          <EntitySet Name="COM_Sucursales" EntityType="EmpresasDBModel.COM_Sucursales" />
+          <EntitySet Name="COM_Visitas" EntityType="EmpresasDBModel.COM_Visitas" />
+          <EntitySet Name="COM_Zonas" EntityType="EmpresasDBModel.COM_Zonas" />
+          <AssociationSet Name="FK_COM_DetalleMeta_COM_Metas" Association="EmpresasDBModel.FK_COM_DetalleMeta_COM_Metas">
+            <End Role="COM_Metas" EntitySet="COM_Metas" />
+            <End Role="COM_DetalleMeta" EntitySet="COM_DetalleMeta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_DetalleMetaPromocion_COM_Metas" Association="EmpresasDBModel.FK_COM_DetalleMetaPromocion_COM_Metas">
+            <End Role="COM_Metas" EntitySet="COM_Metas" />
+            <End Role="COM_DetalleMetaPromocion" EntitySet="COM_DetalleMetaPromocion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_DetalleVisita_COM_Finalidades" Association="EmpresasDBModel.FK_COM_DetalleVisita_COM_Finalidades">
+            <End Role="COM_Finalidades" EntitySet="COM_Finalidades" />
+            <End Role="COM_DetalleVisita" EntitySet="COM_DetalleVisita" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_DetalleVisita_COM_Visitas" Association="EmpresasDBModel.FK_COM_DetalleVisita_COM_Visitas">
+            <End Role="COM_Visitas" EntitySet="COM_Visitas" />
+            <End Role="COM_DetalleVisita" EntitySet="COM_DetalleVisita" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_Empresas_COM_Representantes" Association="EmpresasDBModel.FK_COM_Empresas_COM_Representantes">
+            <End Role="COM_Representantes" EntitySet="COM_Representantes" />
+            <End Role="COM_Empresas" EntitySet="COM_Empresas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_Sucursales_COM_Empresas" Association="EmpresasDBModel.FK_COM_Sucursales_COM_Empresas">
+            <End Role="COM_Empresas" EntitySet="COM_Empresas" />
+            <End Role="COM_Sucursales" EntitySet="COM_Sucursales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_Visitas_COM_ObjetivosVisitas" Association="EmpresasDBModel.FK_COM_Visitas_COM_ObjetivosVisitas">
+            <End Role="COM_ObjetivosVisitas" EntitySet="COM_ObjetivosVisitas" />
+            <End Role="COM_Visitas" EntitySet="COM_Visitas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_QuienRecibeVisita_COM_Visitas" Association="EmpresasDBModel.FK_COM_QuienRecibeVisita_COM_Visitas">
+            <End Role="COM_Visitas" EntitySet="COM_Visitas" />
+            <End Role="COM_QuienRecibeVisita" EntitySet="COM_QuienRecibeVisita" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_Visitas_COM_RepresantesComerciales" Association="EmpresasDBModel.FK_COM_Visitas_COM_RepresantesComerciales">
+            <End Role="COM_RepresantesComerciales" EntitySet="COM_RepresantesComerciales" />
+            <End Role="COM_Visitas" EntitySet="COM_Visitas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_Sucursales_COM_Representantes" Association="EmpresasDBModel.FK_COM_Sucursales_COM_Representantes">
+            <End Role="COM_Representantes" EntitySet="COM_Representantes" />
+            <End Role="COM_Sucursales" EntitySet="COM_Sucursales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_ServiciosMasSolicitados_COM_Servicios" Association="EmpresasDBModel.FK_COM_ServiciosMasSolicitados_COM_Servicios">
+            <End Role="COM_Servicios" EntitySet="COM_Servicios" />
+            <End Role="COM_ServiciosMasSolicitados" EntitySet="COM_ServiciosMasSolicitados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_ServiciosMasSolicitados_COM_Visitas" Association="EmpresasDBModel.FK_COM_ServiciosMasSolicitados_COM_Visitas">
+            <End Role="COM_Visitas" EntitySet="COM_Visitas" />
+            <End Role="COM_ServiciosMasSolicitados" EntitySet="COM_ServiciosMasSolicitados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_Sucursales_COM_Zonas" Association="EmpresasDBModel.FK_COM_Sucursales_COM_Zonas">
+            <End Role="COM_Zonas" EntitySet="COM_Zonas" />
+            <End Role="COM_Sucursales" EntitySet="COM_Sucursales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COM_Visitas_COM_Sucursales" Association="EmpresasDBModel.FK_COM_Visitas_COM_Sucursales">
+            <End Role="COM_Sucursales" EntitySet="COM_Sucursales" />
+            <End Role="COM_Visitas" EntitySet="COM_Visitas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="COM_DetalleMeta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Servicio" Type="Int32" />
+          <Property Name="VentaMensual" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="VentaAnual" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Meta" Type="Int32" />
+          <NavigationProperty Name="COM_Metas" Relationship="EmpresasDBModel.FK_COM_DetalleMeta_COM_Metas" FromRole="COM_DetalleMeta" ToRole="COM_Metas" />
+        </EntityType>
+        <EntityType Name="COM_DetalleMetaPromocion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="VisitasMensual" Type="Int32" />
+          <Property Name="VisitasAnual" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Meta" Type="Int32" />
+          <NavigationProperty Name="COM_Metas" Relationship="EmpresasDBModel.FK_COM_DetalleMetaPromocion_COM_Metas" FromRole="COM_DetalleMetaPromocion" ToRole="COM_Metas" />
+        </EntityType>
+        <EntityType Name="COM_DetalleVisita">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Finalidad" Type="Int32" Nullable="false" />
+          <Property Name="Detalle" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Visita" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="COM_Finalidades" Relationship="EmpresasDBModel.FK_COM_DetalleVisita_COM_Finalidades" FromRole="COM_DetalleVisita" ToRole="COM_Finalidades" />
+          <NavigationProperty Name="COM_Visitas" Relationship="EmpresasDBModel.FK_COM_DetalleVisita_COM_Visitas" FromRole="COM_DetalleVisita" ToRole="COM_Visitas" />
+        </EntityType>
         <EntityType Name="COM_Empresas">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Nit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="RazonSocial" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="NombreComercial" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nit" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RazonSocial" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="NombreComercial" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Representante" Type="Int32" Nullable="false" />
           <Property Name="JfeRecursos" Type="Int32" Nullable="false" />
           <Property Name="Ciudad" Type="Int32" Nullable="false" />
           <Property Name="Direccion" Type="Int32" Nullable="false" />
-          <Property Name="TelefonoFijo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="NroCelular" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TelefonoFijo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NroCelular" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="NroEmpleados" Type="Int32" Nullable="false" />
           <Property Name="Latitud" Type="Int32" />
           <Property Name="Longitud" Type="Int32" />
           <Property Name="Zona" Type="Int32" />
+          <NavigationProperty Name="COM_Representantes" Relationship="EmpresasDBModel.FK_COM_Empresas_COM_Representantes" FromRole="COM_Empresas" ToRole="COM_Representantes" />
+          <NavigationProperty Name="COM_Sucursales" Relationship="EmpresasDBModel.FK_COM_Sucursales_COM_Empresas" FromRole="COM_Empresas" ToRole="COM_Sucursales" />
         </EntityType>
-        <EntityContainer Name="EmpresasContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="COM_Empresas" EntityType="Self.COM_Empresas" />
-        </EntityContainer>
-      </Schema>
+        <EntityType Name="COM_Finalidades">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="COM_DetalleVisita" Relationship="EmpresasDBModel.FK_COM_DetalleVisita_COM_Finalidades" FromRole="COM_Finalidades" ToRole="COM_DetalleVisita" />
+        </EntityType>
+        <EntityType Name="COM_Metas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="FechaInicial" Type="DateTime" Precision="3" />
+          <Property Name="FechaFinal" Type="DateTime" Precision="3" />
+          <Property Name="NroAnualEmpresas" Type="Int32" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PorCumplimiento" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="COM_DetalleMeta" Relationship="EmpresasDBModel.FK_COM_DetalleMeta_COM_Metas" FromRole="COM_Metas" ToRole="COM_DetalleMeta" />
+          <NavigationProperty Name="COM_DetalleMetaPromocion" Relationship="EmpresasDBModel.FK_COM_DetalleMetaPromocion_COM_Metas" FromRole="COM_Metas" ToRole="COM_DetalleMetaPromocion" />
+        </EntityType>
+        <EntityType Name="COM_ObjetivosVisitas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="COM_Visitas" Relationship="EmpresasDBModel.FK_COM_Visitas_COM_ObjetivosVisitas" FromRole="COM_ObjetivosVisitas" ToRole="COM_Visitas" />
+        </EntityType>
+        <EntityType Name="COM_QuienRecibeVisita">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Firma" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Visita" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="COM_Visitas" Relationship="EmpresasDBModel.FK_COM_QuienRecibeVisita_COM_Visitas" FromRole="COM_QuienRecibeVisita" ToRole="COM_Visitas" />
+        </EntityType>
+        <EntityType Name="COM_RepresantesComerciales">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Identificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Pnombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Snombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Papellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sapellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ciudad" Type="Int32" />
+          <Property Name="Direccion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TelContactoEmp" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TelContactoEmerg" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ContactoEmerg" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Zona" Type="Int32" />
+          <NavigationProperty Name="COM_Visitas" Relationship="EmpresasDBModel.FK_COM_Visitas_COM_RepresantesComerciales" FromRole="COM_RepresantesComerciales" ToRole="COM_Visitas" />
+        </EntityType>
+        <EntityType Name="COM_Representantes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Identificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Pnombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Snombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Papellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sapellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="TelContacto" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="COM_Empresas" Relationship="EmpresasDBModel.FK_COM_Empresas_COM_Representantes" FromRole="COM_Representantes" ToRole="COM_Empresas" />
+          <NavigationProperty Name="COM_Sucursales" Relationship="EmpresasDBModel.FK_COM_Sucursales_COM_Representantes" FromRole="COM_Representantes" ToRole="COM_Sucursales" />
+        </EntityType>
+        <EntityType Name="COM_Servicios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="COM_ServiciosMasSolicitados" Relationship="EmpresasDBModel.FK_COM_ServiciosMasSolicitados_COM_Servicios" FromRole="COM_Servicios" ToRole="COM_ServiciosMasSolicitados" />
+        </EntityType>
+        <EntityType Name="COM_ServiciosMasSolicitados">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Visita" Type="Int32" />
+          <Property Name="Servicio" Type="Int32" />
+          <NavigationProperty Name="COM_Servicios" Relationship="EmpresasDBModel.FK_COM_ServiciosMasSolicitados_COM_Servicios" FromRole="COM_ServiciosMasSolicitados" ToRole="COM_Servicios" />
+          <NavigationProperty Name="COM_Visitas" Relationship="EmpresasDBModel.FK_COM_ServiciosMasSolicitados_COM_Visitas" FromRole="COM_ServiciosMasSolicitados" ToRole="COM_Visitas" />
+        </EntityType>
+        <EntityType Name="COM_Sucursales">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Ciudad" Type="Int32" />
+          <Property Name="Direccion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoFijo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NroCelular" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Contacto" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="NroEmpleados" Type="Int32" />
+          <Property Name="Latitud" Type="Int32" />
+          <Property Name="Longitud" Type="Int32" />
+          <Property Name="Zona" Type="Int32" />
+          <Property Name="Empresa" Type="Int32" />
+          <NavigationProperty Name="COM_Empresas" Relationship="EmpresasDBModel.FK_COM_Sucursales_COM_Empresas" FromRole="COM_Sucursales" ToRole="COM_Empresas" />
+          <NavigationProperty Name="COM_Representantes" Relationship="EmpresasDBModel.FK_COM_Sucursales_COM_Representantes" FromRole="COM_Sucursales" ToRole="COM_Representantes" />
+          <NavigationProperty Name="COM_Zonas" Relationship="EmpresasDBModel.FK_COM_Sucursales_COM_Zonas" FromRole="COM_Sucursales" ToRole="COM_Zonas" />
+          <NavigationProperty Name="COM_Visitas" Relationship="EmpresasDBModel.FK_COM_Visitas_COM_Sucursales" FromRole="COM_Sucursales" ToRole="COM_Visitas" />
+        </EntityType>
+        <EntityType Name="COM_Visitas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Representante" Type="Int32" />
+          <Property Name="Sucursal" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="HoraInici" Type="Time" Precision="7" />
+          <Property Name="HoraFin" Type="Time" Precision="7" />
+          <Property Name="Tiempo" Type="Time" Precision="7" />
+          <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Objetivo" Type="Int32" />
+          <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="COM_DetalleVisita" Relationship="EmpresasDBModel.FK_COM_DetalleVisita_COM_Visitas" FromRole="COM_Visitas" ToRole="COM_DetalleVisita" />
+          <NavigationProperty Name="COM_ObjetivosVisitas" Relationship="EmpresasDBModel.FK_COM_Visitas_COM_ObjetivosVisitas" FromRole="COM_Visitas" ToRole="COM_ObjetivosVisitas" />
+          <NavigationProperty Name="COM_QuienRecibeVisita" Relationship="EmpresasDBModel.FK_COM_QuienRecibeVisita_COM_Visitas" FromRole="COM_Visitas" ToRole="COM_QuienRecibeVisita" />
+          <NavigationProperty Name="COM_RepresantesComerciales" Relationship="EmpresasDBModel.FK_COM_Visitas_COM_RepresantesComerciales" FromRole="COM_Visitas" ToRole="COM_RepresantesComerciales" />
+          <NavigationProperty Name="COM_ServiciosMasSolicitados" Relationship="EmpresasDBModel.FK_COM_ServiciosMasSolicitados_COM_Visitas" FromRole="COM_Visitas" ToRole="COM_ServiciosMasSolicitados" />
+          <NavigationProperty Name="COM_Sucursales" Relationship="EmpresasDBModel.FK_COM_Visitas_COM_Sucursales" FromRole="COM_Visitas" ToRole="COM_Sucursales" />
+        </EntityType>
+        <EntityType Name="COM_Zonas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Codigo" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="COM_Sucursales" Relationship="EmpresasDBModel.FK_COM_Sucursales_COM_Zonas" FromRole="COM_Zonas" ToRole="COM_Sucursales" />
+        </EntityType>
+        <Association Name="FK_COM_DetalleMeta_COM_Metas">
+          <End Type="EmpresasDBModel.COM_Metas" Role="COM_Metas" Multiplicity="0..1" />
+          <End Type="EmpresasDBModel.COM_DetalleMeta" Role="COM_DetalleMeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Metas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_DetalleMeta">
+              <PropertyRef Name="Meta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_DetalleMetaPromocion_COM_Metas">
+          <End Type="EmpresasDBModel.COM_Metas" Role="COM_Metas" Multiplicity="0..1" />
+          <End Type="EmpresasDBModel.COM_DetalleMetaPromocion" Role="COM_DetalleMetaPromocion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Metas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_DetalleMetaPromocion">
+              <PropertyRef Name="Meta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_DetalleVisita_COM_Finalidades">
+          <End Type="EmpresasDBModel.COM_Finalidades" Role="COM_Finalidades" Multiplicity="1" />
+          <End Type="EmpresasDBModel.COM_DetalleVisita" Role="COM_DetalleVisita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Finalidades">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_DetalleVisita">
+              <PropertyRef Name="Finalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_DetalleVisita_COM_Visitas">
+          <End Type="EmpresasDBModel.COM_Visitas" Role="COM_Visitas" Multiplicity="1" />
+          <End Type="EmpresasDBModel.COM_DetalleVisita" Role="COM_DetalleVisita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Visitas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_DetalleVisita">
+              <PropertyRef Name="Visita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_Empresas_COM_Representantes">
+          <End Type="EmpresasDBModel.COM_Representantes" Role="COM_Representantes" Multiplicity="1" />
+          <End Type="EmpresasDBModel.COM_Empresas" Role="COM_Empresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Representantes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_Empresas">
+              <PropertyRef Name="Representante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_Sucursales_COM_Empresas">
+          <End Type="EmpresasDBModel.COM_Empresas" Role="COM_Empresas" Multiplicity="0..1" />
+          <End Type="EmpresasDBModel.COM_Sucursales" Role="COM_Sucursales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Empresas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_Sucursales">
+              <PropertyRef Name="Empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_Visitas_COM_ObjetivosVisitas">
+          <End Type="EmpresasDBModel.COM_ObjetivosVisitas" Role="COM_ObjetivosVisitas" Multiplicity="0..1" />
+          <End Type="EmpresasDBModel.COM_Visitas" Role="COM_Visitas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_ObjetivosVisitas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_Visitas">
+              <PropertyRef Name="Objetivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_QuienRecibeVisita_COM_Visitas">
+          <End Type="EmpresasDBModel.COM_Visitas" Role="COM_Visitas" Multiplicity="1" />
+          <End Type="EmpresasDBModel.COM_QuienRecibeVisita" Role="COM_QuienRecibeVisita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Visitas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_QuienRecibeVisita">
+              <PropertyRef Name="Visita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_Visitas_COM_RepresantesComerciales">
+          <End Type="EmpresasDBModel.COM_RepresantesComerciales" Role="COM_RepresantesComerciales" Multiplicity="0..1" />
+          <End Type="EmpresasDBModel.COM_Visitas" Role="COM_Visitas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_RepresantesComerciales">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_Visitas">
+              <PropertyRef Name="Representante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_Sucursales_COM_Representantes">
+          <End Type="EmpresasDBModel.COM_Representantes" Role="COM_Representantes" Multiplicity="0..1" />
+          <End Type="EmpresasDBModel.COM_Sucursales" Role="COM_Sucursales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Representantes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_Sucursales">
+              <PropertyRef Name="Contacto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_ServiciosMasSolicitados_COM_Servicios">
+          <End Type="EmpresasDBModel.COM_Servicios" Role="COM_Servicios" Multiplicity="0..1" />
+          <End Type="EmpresasDBModel.COM_ServiciosMasSolicitados" Role="COM_ServiciosMasSolicitados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Servicios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_ServiciosMasSolicitados">
+              <PropertyRef Name="Servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_ServiciosMasSolicitados_COM_Visitas">
+          <End Type="EmpresasDBModel.COM_Visitas" Role="COM_Visitas" Multiplicity="0..1" />
+          <End Type="EmpresasDBModel.COM_ServiciosMasSolicitados" Role="COM_ServiciosMasSolicitados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Visitas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_ServiciosMasSolicitados">
+              <PropertyRef Name="Visita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_Sucursales_COM_Zonas">
+          <End Type="EmpresasDBModel.COM_Zonas" Role="COM_Zonas" Multiplicity="0..1" />
+          <End Type="EmpresasDBModel.COM_Sucursales" Role="COM_Sucursales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Zonas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_Sucursales">
+              <PropertyRef Name="Zona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COM_Visitas_COM_Sucursales">
+          <End Type="EmpresasDBModel.COM_Sucursales" Role="COM_Sucursales" Multiplicity="0..1" />
+          <End Type="EmpresasDBModel.COM_Visitas" Role="COM_Visitas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COM_Sucursales">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="COM_Visitas">
+              <PropertyRef Name="Sucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EmpresasDBModelStoreContainer" CdmEntityContainer="EmpresasContext">
+          <EntitySetMapping Name="COM_DetalleMeta">
+            <EntityTypeMapping TypeName="EmpresasDBModel.COM_DetalleMeta">
+              <MappingFragment StoreEntitySet="COM_DetalleMeta">
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="VentaAnual" ColumnName="VentaAnual" />
+                <ScalarProperty Name="VentaMensual" ColumnName="VentaMensual" />
+                <ScalarProperty Name="Servicio" ColumnName="Servicio" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COM_DetalleMetaPromocion">
+            <EntityTypeMapping TypeName="EmpresasDBModel.COM_DetalleMetaPromocion">
+              <MappingFragment StoreEntitySet="COM_DetalleMetaPromocion">
+                <ScalarProperty Name="Meta" ColumnName="Meta" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="VisitasAnual" ColumnName="VisitasAnual" />
+                <ScalarProperty Name="VisitasMensual" ColumnName="VisitasMensual" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COM_DetalleVisita">
+            <EntityTypeMapping TypeName="EmpresasDBModel.COM_DetalleVisita">
+              <MappingFragment StoreEntitySet="COM_DetalleVisita">
+                <ScalarProperty Name="Visita" ColumnName="Visita" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+                <ScalarProperty Name="Finalidad" ColumnName="Finalidad" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="COM_Empresas">
             <EntityTypeMapping TypeName="EmpresasDBModel.COM_Empresas">
               <MappingFragment StoreEntitySet="COM_Empresas">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nit" ColumnName="Nit" />
-                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
-                <ScalarProperty Name="NombreComercial" ColumnName="NombreComercial" />
-                <ScalarProperty Name="Representante" ColumnName="Representante" />
-                <ScalarProperty Name="JfeRecursos" ColumnName="JfeRecursos" />
-                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="TelefonoFijo" ColumnName="TelefonoFijo" />
-                <ScalarProperty Name="NroCelular" ColumnName="NroCelular" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="NroEmpleados" ColumnName="NroEmpleados" />
-                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
-                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
                 <ScalarProperty Name="Zona" ColumnName="Zona" />
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="NroEmpleados" ColumnName="NroEmpleados" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="NroCelular" ColumnName="NroCelular" />
+                <ScalarProperty Name="TelefonoFijo" ColumnName="TelefonoFijo" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="JfeRecursos" ColumnName="JfeRecursos" />
+                <ScalarProperty Name="Representante" ColumnName="Representante" />
+                <ScalarProperty Name="NombreComercial" ColumnName="NombreComercial" />
+                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+                <ScalarProperty Name="Nit" ColumnName="Nit" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COM_Finalidades">
+            <EntityTypeMapping TypeName="EmpresasDBModel.COM_Finalidades">
+              <MappingFragment StoreEntitySet="COM_Finalidades">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COM_Metas">
+            <EntityTypeMapping TypeName="EmpresasDBModel.COM_Metas">
+              <MappingFragment StoreEntitySet="COM_Metas">
+                <ScalarProperty Name="PorCumplimiento" ColumnName="PorCumplimiento" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="NroAnualEmpresas" ColumnName="NroAnualEmpresas" />
+                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+                <ScalarProperty Name="FechaInicial" ColumnName="FechaInicial" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COM_ObjetivosVisitas">
+            <EntityTypeMapping TypeName="EmpresasDBModel.COM_ObjetivosVisitas">
+              <MappingFragment StoreEntitySet="COM_ObjetivosVisitas">
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COM_QuienRecibeVisita">
+            <EntityTypeMapping TypeName="EmpresasDBModel.COM_QuienRecibeVisita">
+              <MappingFragment StoreEntitySet="COM_QuienRecibeVisita">
+                <ScalarProperty Name="Visita" ColumnName="Visita" />
+                <ScalarProperty Name="Firma" ColumnName="Firma" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COM_RepresantesComerciales">
+            <EntityTypeMapping TypeName="EmpresasDBModel.COM_RepresantesComerciales">
+              <MappingFragment StoreEntitySet="COM_RepresantesComerciales">
+                <ScalarProperty Name="Zona" ColumnName="Zona" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContactoEmerg" ColumnName="ContactoEmerg" />
+                <ScalarProperty Name="TelContactoEmerg" ColumnName="TelContactoEmerg" />
+                <ScalarProperty Name="TelContactoEmp" ColumnName="TelContactoEmp" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Sapellido" ColumnName="Sapellido" />
+                <ScalarProperty Name="Papellido" ColumnName="Papellido" />
+                <ScalarProperty Name="Snombre" ColumnName="Snombre" />
+                <ScalarProperty Name="Pnombre" ColumnName="Pnombre" />
+                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COM_Representantes">
+            <EntityTypeMapping TypeName="EmpresasDBModel.COM_Representantes">
+              <MappingFragment StoreEntitySet="COM_Representantes">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="TelContacto" ColumnName="TelContacto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Sapellido" ColumnName="Sapellido" />
+                <ScalarProperty Name="Papellido" ColumnName="Papellido" />
+                <ScalarProperty Name="Snombre" ColumnName="Snombre" />
+                <ScalarProperty Name="Pnombre" ColumnName="Pnombre" />
+                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COM_Servicios">
+            <EntityTypeMapping TypeName="EmpresasDBModel.COM_Servicios">
+              <MappingFragment StoreEntitySet="COM_Servicios">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COM_ServiciosMasSolicitados">
+            <EntityTypeMapping TypeName="EmpresasDBModel.COM_ServiciosMasSolicitados">
+              <MappingFragment StoreEntitySet="COM_ServiciosMasSolicitados">
+                <ScalarProperty Name="Servicio" ColumnName="Servicio" />
+                <ScalarProperty Name="Visita" ColumnName="Visita" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COM_Sucursales">
+            <EntityTypeMapping TypeName="EmpresasDBModel.COM_Sucursales">
+              <MappingFragment StoreEntitySet="COM_Sucursales">
+                <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+                <ScalarProperty Name="Zona" ColumnName="Zona" />
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="NroEmpleados" ColumnName="NroEmpleados" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+                <ScalarProperty Name="NroCelular" ColumnName="NroCelular" />
+                <ScalarProperty Name="TelefonoFijo" ColumnName="TelefonoFijo" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COM_Visitas">
+            <EntityTypeMapping TypeName="EmpresasDBModel.COM_Visitas">
+              <MappingFragment StoreEntitySet="COM_Visitas">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Objetivo" ColumnName="Objetivo" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Tiempo" ColumnName="Tiempo" />
+                <ScalarProperty Name="HoraFin" ColumnName="HoraFin" />
+                <ScalarProperty Name="HoraInici" ColumnName="HoraInici" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Sucursal" ColumnName="Sucursal" />
+                <ScalarProperty Name="Representante" ColumnName="Representante" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COM_Zonas">
+            <EntityTypeMapping TypeName="EmpresasDBModel.COM_Zonas">
+              <MappingFragment StoreEntitySet="COM_Zonas">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

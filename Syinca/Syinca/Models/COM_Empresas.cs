@@ -14,6 +14,12 @@ namespace Syinca.Models
     
     public partial class COM_Empresas
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public COM_Empresas()
+        {
+            this.COM_Sucursales = new HashSet<COM_Sucursales>();
+        }
+    
         public int Id { get; set; }
         public string Nit { get; set; }
         public string RazonSocial { get; set; }
@@ -29,5 +35,9 @@ namespace Syinca.Models
         public Nullable<int> Latitud { get; set; }
         public Nullable<int> Longitud { get; set; }
         public Nullable<int> Zona { get; set; }
+    
+        public virtual COM_Representantes COM_Representantes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<COM_Sucursales> COM_Sucursales { get; set; }
     }
 }

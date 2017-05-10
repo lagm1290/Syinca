@@ -4,8 +4,36 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="92acbee6be744f4589eb98681098648c" Name="Diagram1">
-        <EntityTypeShape EntityType="EmpresasDBModel.COM_Empresas" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="92acbee6be744f4589eb98681098648c" Name="Diagram1" ZoomLevel="98">
+        <EntityTypeShape EntityType="EmpresasDBModel.COM_DetalleMeta" Width="1.5" PointX="14" PointY="1.75" />
+        <EntityTypeShape EntityType="EmpresasDBModel.COM_DetalleMetaPromocion" Width="1.5" PointX="14" PointY="4.625" />
+        <EntityTypeShape EntityType="EmpresasDBModel.COM_DetalleVisita" Width="1.5" PointX="9.75" PointY="1.75" />
+        <EntityTypeShape EntityType="EmpresasDBModel.COM_Empresas" Width="1.5" PointX="3" PointY="3.75" />
+        <EntityTypeShape EntityType="EmpresasDBModel.COM_Finalidades" Width="1.5" PointX="7.5" PointY="1" />
+        <EntityTypeShape EntityType="EmpresasDBModel.COM_Metas" Width="1.5" PointX="11.75" PointY="2.75" />
+        <EntityTypeShape EntityType="EmpresasDBModel.COM_ObjetivosVisitas" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="EmpresasDBModel.COM_QuienRecibeVisita" Width="1.5" PointX="9.75" PointY="10.375" />
+        <EntityTypeShape EntityType="EmpresasDBModel.COM_RepresantesComerciales" Width="1.5" PointX="5.25" PointY="9.25" />
+        <EntityTypeShape EntityType="EmpresasDBModel.COM_Representantes" Width="1.5" PointX="0.75" PointY="4.25" />
+        <EntityTypeShape EntityType="EmpresasDBModel.COM_Servicios" Width="1.5" PointX="7.5" PointY="9" />
+        <EntityTypeShape EntityType="EmpresasDBModel.COM_ServiciosMasSolicitados" Width="1.5" PointX="9.75" PointY="4.875" />
+        <EntityTypeShape EntityType="EmpresasDBModel.COM_Sucursales" Width="1.5" PointX="5.25" PointY="3.875" />
+        <EntityTypeShape EntityType="EmpresasDBModel.COM_Visitas" Width="1.5" PointX="7.5" PointY="3.875" />
+        <EntityTypeShape EntityType="EmpresasDBModel.COM_Zonas" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="EmpresasDBModel.FK_COM_DetalleMeta_COM_Metas" />
+        <AssociationConnector Association="EmpresasDBModel.FK_COM_DetalleMetaPromocion_COM_Metas" />
+        <AssociationConnector Association="EmpresasDBModel.FK_COM_DetalleVisita_COM_Finalidades" />
+        <AssociationConnector Association="EmpresasDBModel.FK_COM_DetalleVisita_COM_Visitas" />
+        <AssociationConnector Association="EmpresasDBModel.FK_COM_Empresas_COM_Representantes" />
+        <AssociationConnector Association="EmpresasDBModel.FK_COM_Sucursales_COM_Empresas" />
+        <AssociationConnector Association="EmpresasDBModel.FK_COM_Visitas_COM_ObjetivosVisitas" />
+        <AssociationConnector Association="EmpresasDBModel.FK_COM_QuienRecibeVisita_COM_Visitas" />
+        <AssociationConnector Association="EmpresasDBModel.FK_COM_Visitas_COM_RepresantesComerciales" />
+        <AssociationConnector Association="EmpresasDBModel.FK_COM_Sucursales_COM_Representantes" />
+        <AssociationConnector Association="EmpresasDBModel.FK_COM_ServiciosMasSolicitados_COM_Servicios" />
+        <AssociationConnector Association="EmpresasDBModel.FK_COM_ServiciosMasSolicitados_COM_Visitas" />
+        <AssociationConnector Association="EmpresasDBModel.FK_COM_Sucursales_COM_Zonas" />
+        <AssociationConnector Association="EmpresasDBModel.FK_COM_Visitas_COM_Sucursales" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

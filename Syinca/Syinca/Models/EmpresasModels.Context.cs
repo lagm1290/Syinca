@@ -25,6 +25,20 @@ namespace Syinca.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<COM_DetalleMeta> COM_DetalleMeta { get; set; }
+        public virtual DbSet<COM_DetalleMetaPromocion> COM_DetalleMetaPromocion { get; set; }
+        public virtual DbSet<COM_DetalleVisita> COM_DetalleVisita { get; set; }
         public virtual DbSet<COM_Empresas> COM_Empresas { get; set; }
+        public virtual DbSet<COM_Finalidades> COM_Finalidades { get; set; }
+        public virtual DbSet<COM_Metas> COM_Metas { get; set; }
+        public virtual DbSet<COM_ObjetivosVisitas> COM_ObjetivosVisitas { get; set; }
+        public virtual DbSet<COM_QuienRecibeVisita> COM_QuienRecibeVisita { get; set; }
+        public virtual DbSet<COM_RepresantesComerciales> COM_RepresantesComerciales { get; set; }
+        public virtual DbSet<COM_Representantes> COM_Representantes { get; set; }
+        public virtual DbSet<COM_Servicios> COM_Servicios { get; set; }
+        public virtual DbSet<COM_ServiciosMasSolicitados> COM_ServiciosMasSolicitados { get; set; }
+        public virtual DbSet<COM_Sucursales> COM_Sucursales { get; set; }
+        public virtual DbSet<COM_Visitas> COM_Visitas { get; set; }
+        public virtual DbSet<COM_Zonas> COM_Zonas { get; set; }
     }
 }

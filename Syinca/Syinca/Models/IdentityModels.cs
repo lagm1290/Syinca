@@ -29,5 +29,7 @@ namespace Syinca.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Syinca.Models.COM_Empresas> COM_Empresas { get; set; }
     }
 }
