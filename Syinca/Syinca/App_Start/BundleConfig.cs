@@ -1,6 +1,6 @@
 ﻿using System.Web;
 using System.Web.Optimization;
-
+using System.Web.WebPages;
 namespace Syinca
 {
     public class BundleConfig
